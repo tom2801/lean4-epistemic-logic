@@ -1,14 +1,14 @@
-
+set_option autoImplicit false
 -- Definition of a formula in modal logic
 
 -- epstemic logic extends basic modal logic,
 -- and in this case the box operator is read as "it is known that"
 
 inductive formula where
-| atomic_prop: char → formula
+| atomic_prop: Char → formula
 | not: formula → formula
 | implication: formula → formula → formula
-| box: formula → formula
+| box: formula → formula -- de introdus nat ca sa fac logica multimodala
 
 
 -- p → □q
@@ -20,7 +20,9 @@ inductive formula where
 -- since using the constructors of the formula type can be quite verbose,
 -- we introduce the following notations
 
-def prop (c : char) : formula := formula.atomic_prop c
+-- Implement alternative symbols for operators
+
+def prop (c : Char) : formula := formula.atomic_prop c
 prefix:80 " ¬ " => formula.not
 prefix:70 " □ " => formula.box
 infix:50 " → " => formula.implication
@@ -34,6 +36,7 @@ infix:50 " → " => formula.implication
 def diamond (φ : formula) : formula := ¬ (□ ¬ φ)
 prefix:70 " ⋄ " => diamond
 
+-- sa definesc notiunea de demonstratie
 
 -- defining conjunction and disjunction
 
